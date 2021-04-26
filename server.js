@@ -5,10 +5,9 @@ const util = require("util");
 const PORT = process.env.PORT || 3001;
 const path = require("path");
 const fs = require("fs");
-
 const readFileAsync = util.promisify(fs.readFile);
 
-
+//we need to separate our routes 1st!
 app.get("/",(req, res)=>{
     // res.send("send whatever raw data we may need, in this case. html")
     res.sendFile(path.join(__dirname,"notes.html"))    
