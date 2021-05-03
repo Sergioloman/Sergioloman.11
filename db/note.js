@@ -11,17 +11,17 @@ const readFileAsynch = util.promisify(fs.readFile)
 
 const writeFileAsynch =  util.promisify(fs.writeFile)
 
-// create a note class
+// create a note class, we will use this methods in the rest of our application
 class Note {
+    //reading json
     read(){
-        // we are passing db/db.json since this will be running from server.js rather than note.js
         return readFileAsynch("db/db.json", "utf8")
     }
-
+    //writing to file
     write(note){
         return writeFileAsynch("db/db.json", JSON.stringify(note))
     }
-
+    //fetching all of the notes
     getNotes(){
         return this.read().then((notes) =>{
             //we need to create a temporarty variable
@@ -33,22 +33,19 @@ class Note {
             } catch (error) {
                 parsenotes=[]
             }
-            //this returns all notes available inside array.
             return parsenotes
         })
     }
-    
+    //adding new notes
      addNotes(note){
 
         const{title, text}=note;
-
         if (!title ||!text){
             throw new Error("Note 'title' and 'text' cannot be blank")
         }
-        //get new note to get id from uuid
-
+        //use UUid to assign a new id to each note added.
         const newNote={title, text, id:uuidv4()};
-
+        // return all notes added so far
         return this.getNotes()
             .then((notes)=>[...notes,newNote])
             .then((updatedNotes)=>this.write(updatedNotes))
@@ -56,15 +53,14 @@ class Note {
     
         }
     
-    // //create remove note and pass id do it inside note class
+    //removing notes
     removeNotes(note){
 
-        // console.log(note)
         return this.getNotes()
-    
+    //filter the deleted note with the selected id. Filter it and return everything else.
         .then((notes)=> notes.filter((deletedNote)=> deletedNote.id !== note   ))
+        //see all of the remaining notes again.
         .then((updatedNotes)=>this.write(updatedNotes))
-
     }
   
 }

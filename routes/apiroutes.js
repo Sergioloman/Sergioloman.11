@@ -19,7 +19,7 @@ router.post("/notes",(req,res) =>  {
     
 })
 
-// // route do delete a note from database
+// route do delete a note from database
 router.delete("/notes/:id",(req,res) => {
     note.removeNotes(req.params.id)
         .then(()=>res.json({ok:true}))

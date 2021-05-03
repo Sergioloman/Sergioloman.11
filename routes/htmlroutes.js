@@ -1,12 +1,10 @@
 const path = require("path")
 const router = require("express").Router()
-
-//we need to separate our routes 1st! check on apiroutes.js and 
+//notes.html file link
 router.get("/notes",(req, res)=>{
-    // res.send("send whatever raw data we may need, in this case. html")
     res.sendFile(path.join(__dirname,"../public/notes.html"))    
 })
-
+//index.html file link
 router.get("*",(req, res)=>{
     res.sendFile(path.join(__dirname,"../public/index.html"))    
 })
