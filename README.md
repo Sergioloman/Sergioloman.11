@@ -47,6 +47,7 @@ Our server.js is the main brain of our app. this file sets up our server, its po
 
 * as always be sure to check out our commends in the files to get a detailed description on what is happening in our code. 
 
-* Click ![HERE]() to see our deployed application.
+### Deployement
+* Click ![HERE](https://note-taker-by-sergio.herokuapp.com/) to see our deployed application.
 
 
